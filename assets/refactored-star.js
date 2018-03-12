@@ -1,3 +1,126 @@
+var song = {
+  "clef": "treble",
+  "keySignature": "C",
+  "timeSignature": [
+    4,
+    4
+  ],
+  "voices": [
+    {
+      "name": "Part 1",
+      "measures": [
+        {
+          "notes": [
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "q"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "c/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "q"
+            },
+            {
+              "keys": [
+                "g/4"
+              ],
+              "duration": "q"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+function renderJsonSongToDiv(songObject, div) {
+  VF = Vex.Flow;
+
+  var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+  renderer.resize(700, 125);
+  var context = renderer.getContext();
+
+  // TODO: separate width, etc
+  var stave = new VF.Stave(10, 10, 675);
+  stave.addClef(songObject.clef);
+  stave.addTimeSignature(songObject.timeSignature.join("/"));
+  
+  var notes = [];
+
+  function renderVoice(voice) {
+    voice.measures.forEach(renderMeasure);
+  }
+  
+  function renderMeasure(measure, index, arr) {
+    measure.notes.forEach(renderNote);
+    if (index < arr.length - 1){
+      notes.push(new Vex.Flow.BarNote());
+    }
+  }
+
+  function renderNote(note){
+    notes.push(new VF.StaveNote(note));
+  }
+
+  songObject.voices.forEach(renderVoice);
+
+  stave.setContext(context).draw();
+  // TODO fill in values from object
+  var voice = new VF.Voice({num_beats: 4,  beat_value: 4});
+  voice.setStrict(false);
+  voice.addTickables(notes);
+
+  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 630);
+  voice.draw(context, stave);
+}
+
+var div = document.getElementById("json-song");
+
+renderJsonSongToDiv(song, div);
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////
 function drawSong(pitchToColor,color){
   VF = Vex.Flow;
 
@@ -44,13 +167,13 @@ function drawSong(pitchToColor,color){
   // this one can be called after drawing completed
   // but the note keys have expired by that point and aren't accessible
   // so this one probably not worth keeping...
-  function colorNotesAfter(color){
-    var noteheads = document.querySelectorAll('.vf-notehead > path');
-    for (var i = noteheads.length - 1; i >= 0; i--) {
-      // console.log(noteheads[i].getAttribute('fill')); // black even when CSS is green
-      noteheads[i].setAttribute('fill', color);
-    }
-  }
+  // function colorNotesAfter(color){
+  //   var noteheads = document.querySelectorAll('.vf-notehead > path');
+  //   for (var i = noteheads.length - 1; i >= 0; i--) {
+  //     // console.log(noteheads[i].getAttribute('fill')); // black even when CSS is green
+  //     noteheads[i].setAttribute('fill', color);
+  //   }
+  // }
 
   //////////////
   // first stave
@@ -176,4 +299,4 @@ function drawSong(pitchToColor,color){
   voice.draw(context, thirdStave);
 }
 
-drawSong();
+// drawSong();
