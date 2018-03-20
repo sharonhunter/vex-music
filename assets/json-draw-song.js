@@ -1,177 +1,275 @@
 var staveOne = {
-    "clef": "treble",
-    "keySignature": "C",
-    "timeSignature": [
-      4,
-      4
-    ],
-    "voices": [
-      {
-        "name": "Part 1",
-        "measures": [
-          {
-            "notes": [
-              {
-                "keys": ["c/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["c/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["g/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["g/4"],
-                "duration": "q"
-              }
-            ]
-          },
-          {
-            "notes": [
-              {
-                "keys": ["a/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["a/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["g/4"],
-                "duration": "h"
-              }
-            ]
-          },
-          {
-            "notes": [
-              {
-                "keys": ["f/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["f/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["e/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["e/4"],
-                "duration": "q"
-              }
-            ]
-          },
-          {
-            "notes": [
-              {
-                "keys": ["d/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["d/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["c/4"],
-                "duration": "h"
-              }
-            ]
-          }
-        ]
-      }
-    ]
+  "x": 10,
+  "y": 10,
+  "staveWidth": 875,
+  "spacerWidth": 810,
+  "num_beats": 4,
+  "beat_value": 4,
+  "clef": "treble",
+  "keySignature": "C",
+  "timeSignature": [
+    4,
+    4
+  ],
+  "voices": [
+    {
+      "name": "Part 1",
+      "measures": [
+        {
+          "notes": [
+            {
+              "keys": ["c/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["c/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["a/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["a/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "h"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["d/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["d/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["c/4"],
+              "duration": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
 
 var staveTwo = {
-    "clef": "treble",
-    "keySignature": "C",
-    "timeSignature": [
-      4,
-      4
-    ],
-    "voices": [
-      {
-        "name": "Part 1",
-        "measures": [
-          {
-            "notes": [
-              {
-                "keys": ["g/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["g/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["f/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["f/4"],
-                "duration": "q"
-              }
-            ]
-          },
-          {
-            "notes": [
-              {
-                "keys": ["e/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["e/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["d/4"],
-                "duration": "h"
-              }
-            ]
-          },
-          {
-            "notes": [
-              {
-                "keys": ["g/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["g/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["f/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["f/4"],
-                "duration": "q"
-              }
-            ]
-          },
-          {
-            "notes": [
-              {
-                "keys": ["e/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["e/4"],
-                "duration": "q"
-              },
-              {
-                "keys": ["d/4"],
-                "duration": "h"
-              }
-            ]
-          }
-        ]
-      }
-    ]
+  "x": 10,
+  "y": 10,
+  "staveWidth": 875,
+  "spacerWidth": 845,
+  "num_beats": 4,
+  "beat_value": 4,
+  "clef": "treble",
+  "keySignature": "C",
+  "voices": [
+    {
+      "name": "Part 1",
+      "measures": [
+        {
+          "notes": [
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["d/4"],
+              "duration": "h"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["d/4"],
+              "duration": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+var staveThree = {
+  "x": 10,
+  "y": 10,
+  "staveWidth": 875,
+  "spacerWidth": 845,
+  "num_beats": 4,
+  "beat_value": 4,
+  "clef": "treble",
+  "keySignature": "C",
+  "voices": [
+    {
+      "name": "Part 1",
+      "measures": [
+        {
+          "notes": [
+            {
+              "keys": ["c/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["c/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "q"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["a/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["a/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["g/4"],
+              "duration": "h"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["f/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["e/4"],
+              "duration": "q"
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "keys": ["d/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["d/4"],
+              "duration": "q"
+            },
+            {
+              "keys": ["c/4"],
+              "duration": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
 
 function createSongDiv(containerId, divId){
@@ -194,8 +292,7 @@ function renderStaveToDiv(songObject, div) {
   renderer.resize(900, 125);
   var context = renderer.getContext();
 
-  // TODO: separate width, etc
-  var stave = new VF.Stave(10, 10, 875);
+  var stave = new VF.Stave(songObject.x, songObject.y, songObject.staveWidth);
   if (songObject.clef) {
     stave.addClef(songObject.clef);
   }
@@ -241,17 +338,16 @@ function renderStaveToDiv(songObject, div) {
 
   colorNotes(notes);
 
-  // time signature would only be on the first stave, so...think about this
-  var voice = new VF.Voice({num_beats: songObject.timeSignature[0], 
-                            beat_value: songObject.timeSignature[1]});
+  var voice = new VF.Voice({num_beats: songObject.num_beats, 
+                            beat_value: songObject.beat_value});
   voice.setStrict(false);
   voice.addTickables(notes);
 
-  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 810);
+  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], songObject.spacerWidth);
   voice.draw(context, stave);
 }
 
-var staveArray = [staveOne, staveTwo];
+var staveArray = [staveOne, staveTwo, staveThree];
 
 function drawSongToPage(containerId, divId){
   var div = createSongDiv(containerId, divId);
