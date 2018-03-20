@@ -216,30 +216,31 @@ function renderStaveToDiv(songObject, div) {
     }
   }
 
+  // this works, but runs a lot of times
+  // seems to only work when called on the array, 
+  // does not work on the single note though seems like it would
+  // also need to be able to pass in colors rather than hard-coding here
   function colorNotes(arr){
     // if (!noteToColor || !color){
     //   return;
     // };
-    // this works, but runs twice...
     for (var i = arr.length - 1; i >= 0; i--) {
-      // some kind of crazy recursion is happening in here, find and fix....
-      // console.log(arr[i].keys)
       if(arr[i].keys == 'f/4'){
         arr[i].setKeyStyle(0, { fillStyle: 'lime' });
       }
     }
   }
 
-  colorNotes(notes);
-
   function renderNote(note){
-    colorNotes(notes);
     notes.push(new VF.StaveNote(note));
   }
 
   songObject.voices.forEach(renderVoice);
 
   stave.setContext(context).draw();
+
+  colorNotes(notes);
+
   // time signature would only be on the first stave, so...think about this
   var voice = new VF.Voice({num_beats: songObject.timeSignature[0], 
                             beat_value: songObject.timeSignature[1]});
