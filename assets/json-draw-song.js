@@ -285,7 +285,7 @@ function createSongDiv(containerId, divId){
   return div;
 }
 
-function renderStaveToDiv(songObject, div) {
+function renderStaveToDiv(songObject, div, pitchToColor, color) {
   VF = Vex.Flow;
 
   var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
@@ -313,35 +313,34 @@ function renderStaveToDiv(songObject, div) {
     }
   }
 
+  function renderNote(note){
+    notes.push(new VF.StaveNote(note));
+  }
+
   // this works, but runs a lot of times
   // seems to only work when called on the array, 
   // does not work on the single note though seems like it would
-  // also need to be able to pass in colors rather than hard-coding here
-  function colorNotes(arr){
-    // if (!noteToColor || !color){
-    //   return;
-    // };
+  function colorNotes(arr, pitchToColor, color){
+    if (!pitchToColor || !color){
+      return;
+    };
     for (var i = arr.length - 1; i >= 0; i--) {
-      if(arr[i].keys == 'f/4'){
-        arr[i].setKeyStyle(0, { fillStyle: 'lime' });
+      if(arr[i].keys == pitchToColor){
+        arr[i].setKeyStyle(0, { fillStyle: color });
       }
     }
-  }
-
-  function renderNote(note){
-    notes.push(new VF.StaveNote(note));
   }
 
   songObject.voices.forEach(renderVoice);
 
   stave.setContext(context).draw();
 
-  colorNotes(notes);
-
   var voice = new VF.Voice({num_beats: songObject.num_beats, 
                             beat_value: songObject.beat_value});
   voice.setStrict(false);
   voice.addTickables(notes);
+
+  colorNotes(notes, pitchToColor, color);
 
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], songObject.spacerWidth);
   voice.draw(context, stave);
@@ -349,11 +348,11 @@ function renderStaveToDiv(songObject, div) {
 
 var staveArray = [staveOne, staveTwo, staveThree];
 
-function drawSongToPage(containerId, divId){
+function drawSongToPage(containerId, divId, pitchToColor, color){
   var div = createSongDiv(containerId, divId);
   for (var i = 0; i < staveArray.length; i++) {
-    renderStaveToDiv(staveArray[i], div);
+    renderStaveToDiv(staveArray[i], div, pitchToColor, color);
   }
 }
 
-drawSongToPage('json-song-container', 'json-song');
+drawSongToPage('json-song-container', 'json-song', 'c/4', 'orange');
