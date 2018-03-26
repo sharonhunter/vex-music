@@ -285,7 +285,31 @@ function createSongDiv(containerId, divId){
   return div;
 }
 
-function renderStaveToDiv(songObject, div, pitchToColor, color) {
+function applyToNotes(songObject, noteFn){
+  songObject.voices.forEach(function(voice){
+    voice.measures.forEach(function(measure){
+      measure.notes.forEach(noteFn);
+    })
+  })
+}
+
+function colorByPitch(songObject, pitchToColor, color){
+  applyToNotes(songObject, function(note){
+    if(note.keys == pitchToColor){
+      note.color = color;
+    }
+  })
+}
+
+function colorByDuration(songObject, durationToColor, color){
+  applyToNotes(songObject, function(note){
+    if(note.duration == durationToColor){
+      note.color = color;
+    }
+  })
+}
+
+function renderStaveToDiv(songObject, div) {
   VF = Vex.Flow;
 
   var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
@@ -314,21 +338,11 @@ function renderStaveToDiv(songObject, div, pitchToColor, color) {
   }
 
   function renderNote(note){
-    notes.push(new VF.StaveNote(note));
-  }
-
-  // this works, but runs a lot of times
-  // seems to only work when called on the array, 
-  // does not work on the single note though seems like it would
-  function colorNotes(arr, pitchToColor, color){
-    if (!pitchToColor || !color){
-      return;
-    };
-    for (var i = arr.length - 1; i >= 0; i--) {
-      if(arr[i].keys == pitchToColor){
-        arr[i].setKeyStyle(0, { fillStyle: color });
-      }
+    var staveNote = new VF.StaveNote({ keys: note.keys, duration: note.duration });
+    if (note.hasOwnProperty('color')){
+      staveNote.setKeyStyle(0, { fillStyle: note.color });
     }
+    notes.push(staveNote);
   }
 
   songObject.voices.forEach(renderVoice);
@@ -340,19 +354,23 @@ function renderStaveToDiv(songObject, div, pitchToColor, color) {
   voice.setStrict(false);
   voice.addTickables(notes);
 
-  colorNotes(notes, pitchToColor, color);
-
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], songObject.spacerWidth);
   voice.draw(context, stave);
 }
 
 var staveArray = [staveOne, staveTwo, staveThree];
 
-function drawSongToPage(containerId, divId, pitchToColor, color){
+staveArray.forEach(function(staff){
+  colorByPitch(staff, 'c/4', 'lime');
+  colorByDuration(staff, 'h', 'blue');
+})
+
+function drawSongToPage(containerId, divId){
   var div = createSongDiv(containerId, divId);
   for (var i = 0; i < staveArray.length; i++) {
-    renderStaveToDiv(staveArray[i], div, pitchToColor, color);
+    renderStaveToDiv(staveArray[i], div);
   }
 }
 
-drawSongToPage('json-song-container', 'json-song', 'c/4', 'orange');
+
+drawSongToPage('json-song-container', 'json-song');
