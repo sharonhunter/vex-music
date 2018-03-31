@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+
+	  <title>SVG Music</title>
+	  <meta name="description" content="">
+	  <meta name="author" content="">
+
+	  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+
+	  <!--[if lt IE 9]>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+	  <![endif]-->
+	  <style>
+	    .container { text-align: center; padding-top: 0px;}
+	    svg { border: 1px solid red; }
+	    h3 { font-family: Avenir, sans-serif; margin-top: 50px;}
+	    /*.vf-notehead > path {
+	      fill: lime;
+	    }*/
+	    /*
+	    works like a border, not sure if keeping or not
+	    .vf-stavenote:hover {
+	    	outline: 1px solid red;
+	    }*/
+	    .vf-notehead > path:hover {
+	      fill: red;
+	    }
+	  </style>
+	</head>
+
+	<body>
+		<div class="container">
+	    <h3>Twinkle Twinkle Little Star</h3>
+	    <div id="song-container"></div>
+	    <!-- <button onclick="drawSong('c/4', 'lime')">Color C notes</button>
+	    <button onclick="drawSong('d/4', 'orange')">Color D notes</button>
+	    <button onclick="drawSong('e/4', 'gold')">Color E notes</button>
+	    <button onclick="drawSong('f/4', 'magenta')">Color F notes</button>
+	    <button onclick="drawSong('g/4', 'deepskyblue')">Color G notes</button>
+	    <button onclick="drawSong('a/4', 'blue')">Color A notes</button>
+	    <button onclick="drawSong('b/4', 'gray')">Color B notes</button> -->
+	  </div>
+	  <div id="json-song-container">
+	    <div id="json-song"></div>
+	    <button onclick="wholeThing('json-song-container', 'json-song')">Color C notes</button>
+	  </div>
+		<script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
+	  <!-- <script src="/assets/create-music.js"></script> -->
+	  <!-- <script src="/assets/twinkle-twinkle.js"></script> -->
+	  <script src="/assets/json-draw-song.js"></script>
+	  <!-- <script src="assets/easy-score-create.js"></script> -->
+	  <!-- <script src="assets/bach-example.js"></script> -->
+	</body>
+</html>

@@ -4,7 +4,7 @@
 	<head>
 	  <meta charset="utf-8">
 
-	  <title>SVG Music</title>
+	  <title>Music</title>
 	  <meta name="description" content="">
 	  <meta name="author" content="">
 
@@ -45,13 +45,33 @@
 	  </div>
 	  <div id="json-song-container">
 	    <div id="json-song"></div>
-	    <button onclick="wholeThing('json-song-container', 'json-song')">Color C notes</button>
+	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
+	                                      divId: 'json-song', 
+	                                      pitchToColor: 'c/4',
+	                                      pitchColor: 'lime'})">Lime C</button>
+	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
+	                                      divId: 'json-song', 
+	                                      pitchToColor: 'f/4',
+	                                      pitchColor: 'aqua' })">Aqua F</button>
+	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
+	                                      divId: 'json-song', 
+	                                      pitchToColor: 'e/4',
+	                                      pitchColor: 'green'})">Green E</button>
+	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
+	                                      divId: 'json-song', 
+	                                      durationToColor: 'h',
+	                                      durationColor: 'red'})">Red H</button>
+	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
+	                                      divId: 'json-song', 
+	                                      durationToColor: 'h',
+	                                      durationColor: 'purple'})">Purple H</button>
+	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
+	                                      divId: 'json-song', 
+	                                      durationToColor: 'q',
+	                                      durationColor: 'red'})">Red Q</button>
+
 	  </div>
 		<script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
-	  <!-- <script src="/assets/create-music.js"></script> -->
-	  <!-- <script src="/assets/twinkle-twinkle.js"></script> -->
 	  <script src="/assets/json-draw-song.js"></script>
-	  <!-- <script src="assets/easy-score-create.js"></script> -->
-	  <!-- <script src="assets/bach-example.js"></script> -->
 	</body>
 </html>

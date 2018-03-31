@@ -295,9 +295,10 @@ function applyToNotes(songObject, noteFn){
 
 function colorByPitch(songObject, pitchToColor, color){
   applyToNotes(songObject, function(note){
-    if(note.keys == pitchToColor){
-      note.color = color;
-    }
+    // if(note.keys == pitchToColor){
+    //   note.color = color;
+    // }
+    note.keys == pitchToColor ? note.color = color : note.color = 'black';
   })
 }
 
@@ -306,6 +307,7 @@ function colorByDuration(songObject, durationToColor, color){
     if(note.duration == durationToColor){
       note.color = color;
     }
+    // note.duration == durationToColor ? note.color : note.color = 'black';
   })
 }
 
@@ -360,17 +362,11 @@ function renderStaveToDiv(songObject, div) {
 
 var staveArray = [staveOne, staveTwo, staveThree];
 
-staveArray.forEach(function(staff){
-  colorByPitch(staff, 'c/4', 'lime');
-  colorByDuration(staff, 'h', 'blue');
-})
-
-function drawSongToPage(containerId, divId){
-  var div = createSongDiv(containerId, divId);
-  for (var i = 0; i < staveArray.length; i++) {
-    renderStaveToDiv(staveArray[i], div);
-  }
+function drawSongToPage(options){
+  var div = createSongDiv(options.containerId, options.divId);
+  staveArray.forEach(function(staff){
+    colorByPitch(staff, options.pitchToColor, options.pitchColor);
+    colorByDuration(staff, options.durationToColor, options.durationColor);
+    renderStaveToDiv(staff, div);
+  })
 }
-
-
-drawSongToPage('json-song-container', 'json-song');
