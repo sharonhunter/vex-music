@@ -37,7 +37,8 @@
       <!-- TODO populate with only pitches from the song -->
 	    <label for="pitchChoices">Pitch To Color</label>
 	    <select id="pitchChoices" onchange="updatePitchChoice()">
-	      <option value="c/4" selected>C4</option>
+	      <option value="none" selected>None</option>
+	      <option value="c/4">C4</option>
 	      <option value="d/4">D4</option>
 	      <option value="e/4">E4</option>
 	      <option value="f/4">F4</option>
@@ -57,6 +58,15 @@
 	      <option value="blue">Blue</option>
 	      <option value="#9B30FF">Purple</option>
 	    </select>
+
+	    <label for="durationChoices">Duration</label>
+	    <select id="durationChoices" onchange="updateDurationChoice()">
+	    	<option value="none" selected>None</option>
+	      <option value="q">Quarter Notes</option>
+	      <option value="h">Half Notes</option>
+	      <option value="w">Whole Notes</option>
+	    </select>
+
 	    <button onclick="drawSongWithColors()">Color Notes</button>
 	  </div>
 
@@ -73,11 +83,17 @@
       	  return chosenColor;
         }
 
+        function updateDurationChoice(){
+      	  var chosenDuration = document.getElementById("durationChoices").value;
+      	  return chosenDuration;
+        }
+
         function createOptions(){
           return { containerId : 'json-song-container',
                    divId: 'json-song',
+                   durationToColor: updateDurationChoice(),
                    pitchToColor: updatePitchChoice(),
-                   pitchColor: updateColorChoice()
+                   color: updateColorChoice()
                  };
         }
 

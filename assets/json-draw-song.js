@@ -286,21 +286,23 @@ function createSongDiv(containerId, divId){
 }
 
 function applyToNotes(staveObject, noteFn){
-  staveObject.voices.forEach(function(voice){
+  var copiedStave = Object.assign({}, staveObject);
+  copiedStave.voices.forEach(function(voice){
     voice.measures.forEach(function(measure){
       measure.notes.forEach(noteFn);
     })
   })
+  return copiedStave;
 }
 
 function colorByPitch(staveObject, pitchToColor, color){
-  applyToNotes(staveObject, function(note){
+  return applyToNotes(staveObject, function(note){
     note.keys == pitchToColor ? note.color = color : note.color = 'black';
   })
 }
 
 function colorByDuration(staveObject, durationToColor, color){
-  applyToNotes(staveObject, function(note){
+  return applyToNotes(staveObject, function(note){
     if(note.duration == durationToColor){
       note.color = color;
     }
@@ -360,9 +362,15 @@ var staveArray = [staveOne, staveTwo, staveThree];
 
 function drawSongToPage(options){
   var div = createSongDiv(options.containerId, options.divId);
-  staveArray.forEach(function(staveObject){
-    colorByPitch(staveObject, options.pitchToColor, options.pitchColor);
-    // colorByDuration(staveObject, options.durationToColor, options.durationColor);
-    renderStaveToDiv(staveObject, div);
+  // make a copy of staveArray and color each stave's pitches or durations
+  var staveArrayCopy = staveArray.map(function(item){
+    var coloredItem = colorByPitch(item, options.pitchToColor, options.color);
+    coloredItem = colorByDuration(coloredItem, options.durationToColor, options.color);
+    return coloredItem;
+  })
+
+  // render each element of staveArrayCopy
+  staveArrayCopy.forEach(function(s){
+    renderStaveToDiv(s, div);
   })
 }
