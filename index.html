@@ -32,46 +32,66 @@
 	</head>
 
 	<body>
-		<div class="container">
-	    <h3>Twinkle Twinkle Little Star</h3>
-	    <div id="song-container"></div>
-	    <!-- <button onclick="drawSong('c/4', 'lime')">Color C notes</button>
-	    <button onclick="drawSong('d/4', 'orange')">Color D notes</button>
-	    <button onclick="drawSong('e/4', 'gold')">Color E notes</button>
-	    <button onclick="drawSong('f/4', 'magenta')">Color F notes</button>
-	    <button onclick="drawSong('g/4', 'deepskyblue')">Color G notes</button>
-	    <button onclick="drawSong('a/4', 'blue')">Color A notes</button>
-	    <button onclick="drawSong('b/4', 'gray')">Color B notes</button> -->
-	  </div>
 	  <div id="json-song-container">
 	    <div id="json-song"></div>
-	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
-	                                      divId: 'json-song', 
-	                                      pitchToColor: 'c/4',
-	                                      pitchColor: 'lime'})">Lime C</button>
-	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
-	                                      divId: 'json-song', 
-	                                      pitchToColor: 'f/4',
-	                                      pitchColor: 'aqua' })">Aqua F</button>
-	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
-	                                      divId: 'json-song', 
-	                                      pitchToColor: 'e/4',
-	                                      pitchColor: 'green'})">Green E</button>
-	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
-	                                      divId: 'json-song', 
-	                                      durationToColor: 'h',
-	                                      durationColor: 'red'})">Red H</button>
-	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
-	                                      divId: 'json-song', 
-	                                      durationToColor: 'h',
-	                                      durationColor: 'purple'})">Purple H</button>
-	    <button onclick="drawSongToPage({ containerId: 'json-song-container', 
-	                                      divId: 'json-song', 
-	                                      durationToColor: 'q',
-	                                      durationColor: 'red'})">Red Q</button>
+      <!-- TODO populate with only pitches from the song -->
+	    <label for="pitchChoices">Pitch To Color</label>
+	    <select id="pitchChoices" onchange="updatePitchChoice()">
+	      <option value="c/4" selected>C4</option>
+	      <option value="d/4">D4</option>
+	      <option value="e/4">E4</option>
+	      <option value="f/4">F4</option>
+	      <option value="g/4">G4</option>
+	      <option value="a/4">A4</option>
+	      <option value="b/4">B4</option>
+	      <option value="c/5">C5</option>
+	    </select>
 
+      <label for="colorChoices">Color</label>
+	    <select id="colorChoices" onchange="updateColorChoice()">
+	    	<option value="black" selected>None</option>
+	      <option value="red">Red</option>
+	      <option value="orange">Orange</option>
+	      <option value="lime">Lime</option>
+	      <option value="aqua">Aqua</option>
+	      <option value="blue">Blue</option>
+	      <option value="#9B30FF">Purple</option>
+	    </select>
+	    <button onclick="drawSongWithColors()">Color Notes</button>
 	  </div>
+
 		<script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
 	  <script src="/assets/json-draw-song.js"></script>
+	  <script>
+      	function updatePitchChoice(){
+      	  var chosenPitch = document.getElementById("pitchChoices").value;
+      	  return chosenPitch;
+        }
+
+        function updateColorChoice(){
+      	  var chosenColor = document.getElementById("colorChoices").value;
+      	  return chosenColor;
+        }
+
+        function createOptions(){
+          return { containerId : 'json-song-container',
+                   divId: 'json-song',
+                   pitchToColor: updatePitchChoice(),
+                   pitchColor: updateColorChoice()
+                 };
+        }
+
+        function drawSongWithColors(){
+        	var options = createOptions();
+        	drawSongToPage(options);
+        }
+
+        function drawInitialSong(){
+        	var options = createOptions();
+        	drawSongToPage(options);
+        }
+
+        drawInitialSong();
+      </script>
 	</body>
 </html>

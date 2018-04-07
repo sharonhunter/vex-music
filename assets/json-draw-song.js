@@ -285,45 +285,41 @@ function createSongDiv(containerId, divId){
   return div;
 }
 
-function applyToNotes(songObject, noteFn){
-  songObject.voices.forEach(function(voice){
+function applyToNotes(staveObject, noteFn){
+  staveObject.voices.forEach(function(voice){
     voice.measures.forEach(function(measure){
       measure.notes.forEach(noteFn);
     })
   })
 }
 
-function colorByPitch(songObject, pitchToColor, color){
-  applyToNotes(songObject, function(note){
-    // if(note.keys == pitchToColor){
-    //   note.color = color;
-    // }
+function colorByPitch(staveObject, pitchToColor, color){
+  applyToNotes(staveObject, function(note){
     note.keys == pitchToColor ? note.color = color : note.color = 'black';
   })
 }
 
-function colorByDuration(songObject, durationToColor, color){
-  applyToNotes(songObject, function(note){
+function colorByDuration(staveObject, durationToColor, color){
+  applyToNotes(staveObject, function(note){
     if(note.duration == durationToColor){
       note.color = color;
     }
-    // note.duration == durationToColor ? note.color : note.color = 'black';
   })
 }
 
-function renderStaveToDiv(songObject, div) {
+function renderStaveToDiv(staveObject, div) {
   VF = Vex.Flow;
 
   var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
   renderer.resize(900, 125);
   var context = renderer.getContext();
 
-  var stave = new VF.Stave(songObject.x, songObject.y, songObject.staveWidth);
-  if (songObject.clef) {
-    stave.addClef(songObject.clef);
+  var stave = new VF.Stave(staveObject.x, staveObject.y, staveObject.staveWidth);
+  if (staveObject.clef) {
+    stave.addClef(staveObject.clef);
   }
-  if (songObject.timeSignature) {
-    stave.addTimeSignature(songObject.timeSignature.join("/"));
+  if (staveObject.timeSignature) {
+    stave.addTimeSignature(staveObject.timeSignature.join("/"));
   }
 
   var notes = [];
@@ -347,16 +343,16 @@ function renderStaveToDiv(songObject, div) {
     notes.push(staveNote);
   }
 
-  songObject.voices.forEach(renderVoice);
+  staveObject.voices.forEach(renderVoice);
 
   stave.setContext(context).draw();
 
-  var voice = new VF.Voice({num_beats: songObject.num_beats, 
-                            beat_value: songObject.beat_value});
+  var voice = new VF.Voice({num_beats: staveObject.num_beats, 
+                            beat_value: staveObject.beat_value});
   voice.setStrict(false);
   voice.addTickables(notes);
 
-  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], songObject.spacerWidth);
+  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], staveObject.spacerWidth);
   voice.draw(context, stave);
 }
 
@@ -364,9 +360,9 @@ var staveArray = [staveOne, staveTwo, staveThree];
 
 function drawSongToPage(options){
   var div = createSongDiv(options.containerId, options.divId);
-  staveArray.forEach(function(staff){
-    colorByPitch(staff, options.pitchToColor, options.pitchColor);
-    colorByDuration(staff, options.durationToColor, options.durationColor);
-    renderStaveToDiv(staff, div);
+  staveArray.forEach(function(staveObject){
+    colorByPitch(staveObject, options.pitchToColor, options.pitchColor);
+    // colorByDuration(staveObject, options.durationToColor, options.durationColor);
+    renderStaveToDiv(staveObject, div);
   })
 }
