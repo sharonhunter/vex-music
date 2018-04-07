@@ -36,7 +36,7 @@
 	    <div id="json-song"></div>
       <!-- TODO populate with only pitches from the song -->
 	    <label for="pitchChoices">Pitch To Color</label>
-	    <select id="pitchChoices" onchange="updatePitchChoice()">
+	    <select id="pitchChoices" onchange="renderSong()">
 	      <option value="none" selected>None</option>
 	      <option value="c/4">C4</option>
 	      <option value="d/4">D4</option>
@@ -49,7 +49,7 @@
 	    </select>
 
       <label for="colorChoices">Color</label>
-	    <select id="colorChoices" onchange="updateColorChoice()">
+	    <select id="colorChoices" onchange="renderSong()">
 	    	<option value="black" selected>None</option>
 	      <option value="red">Red</option>
 	      <option value="orange">Orange</option>
@@ -60,54 +60,79 @@
 	    </select>
 
 	    <label for="durationChoices">Duration</label>
-	    <select id="durationChoices" onchange="updateDurationChoice()">
+	    <select id="durationChoices" onchange="renderSong()">
 	    	<option value="none" selected>None</option>
 	      <option value="q">Quarter Notes</option>
 	      <option value="h">Half Notes</option>
 	      <option value="w">Whole Notes</option>
 	    </select>
 
-	    <button onclick="drawSongWithColors()">Color Notes</button>
+	    <label for="songChoices">Song Choices</label>
+	    <select id="songChoices" onchange="renderSong()">
+	      <option value="none">None</option>
+	    </select>
 	  </div>
 
 		<script src="https://unpkg.com/vexflow/releases/vexflow-min.js"></script>
-	  <script src="/assets/json-draw-song.js"></script>
-	  <script>
-      	function updatePitchChoice(){
-      	  var chosenPitch = document.getElementById("pitchChoices").value;
-      	  return chosenPitch;
-        }
+	  <script type="module">
+	  	import {drawSongToPage} from "/assets/json-draw-song.js";
 
-        function updateColorChoice(){
-      	  var chosenColor = document.getElementById("colorChoices").value;
-      	  return chosenColor;
-        }
+      var songList = { 
+      	"Twinkle Twinkle Little Star" : "/assets/twinkle-twinkle-little-star.js"
+      };
 
-        function updateDurationChoice(){
-      	  var chosenDuration = document.getElementById("durationChoices").value;
-      	  return chosenDuration;
-        }
+      function populateSongChoices(songList){
+        var songChoicesSelect = document.getElementById("songChoices");
+        Object.keys(songList).forEach(function(i){
+        	var option = document.createElement("option");
+          option.text = i;
+          songChoicesSelect.add(option);
+        })
+      }
+      populateSongChoices(songList);
 
-        function createOptions(){
-          return { containerId : 'json-song-container',
-                   divId: 'json-song',
-                   durationToColor: updateDurationChoice(),
-                   pitchToColor: updatePitchChoice(),
-                   color: updateColorChoice()
-                 };
-        }
+  	  // TODO: pitch and duration color still bump into each other when both are set to values
+  	  // TODO: abstract these functions since all the same formula
+  	  // TODO: or, combine logic into a single function that returns an object?
+    	function updatePitchChoice(){
+    	  var chosenPitch = document.getElementById("pitchChoices").value;
+    	  return chosenPitch;
+      }
+      
+      function updateColorChoice(){
+    	  var chosenColor = document.getElementById("colorChoices").value;
+    	  return chosenColor;
+      }
 
-        function drawSongWithColors(){
-        	var options = createOptions();
-        	drawSongToPage(options);
-        }
+      function updateDurationChoice(){
+    	  var chosenDuration = document.getElementById("durationChoices").value;
+    	  return chosenDuration;
+      }
 
-        function drawInitialSong(){
-        	var options = createOptions();
-        	drawSongToPage(options);
-        }
+      function updateSongChoice(){
+    	  var chosenSong = document.getElementById("songChoices").value;
+    	  return chosenSong;
+      }
 
-        drawInitialSong();
-      </script>
+      function createOptions(){
+        return { containerId : 'json-song-container',
+                 divId: 'json-song',
+                 durationToColor: updateDurationChoice(),
+                 pitchToColor: updatePitchChoice(),
+                 color: updateColorChoice(),
+                 songChoice: updateSongChoice()
+               };
+      }
+
+      function renderSong(){
+      	var options = createOptions();
+      	import(songList[options.songChoice]).then(function(s){
+      	  drawSongToPage(s.staveArray, options);
+        });
+      }
+
+      // TODO: investigate another way to do this
+      window.renderSong = renderSong;
+    </script>
 	</body>
 </html>
